@@ -1,0 +1,28 @@
+ans = []
+candid = [2,3,6,7]
+tar = 7
+
+def helper( candidates, target, i, cursum, temp):
+    if (cursum > target):
+        return
+    if (i == len(candidates)):
+        if (cursum == target):
+            ans.append(temp[:])
+        return
+
+    cursum += candidates[i]
+    temp.append(candidates[i])
+    helper(candidates, target, i, cursum, temp)
+    cursum -= candidates[i]
+    temp.pop()
+
+    helper(candidates, target, i+1, cursum, temp)
+
+
+def combinationsum(candidates, target):
+    temp = []
+    helper(candidates, target, 0, 0 , temp)
+    return ans
+
+hehe = combinationsum(candid, tar)
+print(hehe)
