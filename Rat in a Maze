@@ -1,0 +1,43 @@
+class Solution:
+    
+    def __init__(self):
+        self.ans = []
+    
+    def isSafe(self, mat, visited, srcx, srcy, n):
+        if (srcx>=0 and srcy>= 0 and srcx<n and srcy<n and mat[srcx][srcy]==1 and visited[srcx][srcy]==0):
+            return True
+        return False
+        
+    def helper(self, mat, visited, srcx, srcy, n, temp):
+        if(srcx == n-1 and srcy == n-1):
+            self.ans.append(temp)
+            return
+        
+        visited[srcx][srcy] =1
+        
+        if (self.isSafe(mat, visited, srcx+1, srcy, n)):
+            self.helper(mat, visited, srcx+1, srcy,n, temp+'D')
+            
+        if (self.isSafe(mat, visited, srcx, srcy-1, n)):
+            self.helper(mat, visited, srcx, srcy-1,n, temp+'L')
+           
+        if (self.isSafe(mat, visited, srcx, srcy+1, n)):
+            self.helper(mat, visited, srcx, srcy+1,n, temp+'R')
+        
+        if (self.isSafe(mat, visited, srcx-1, srcy, n)):
+            self.helper(mat, visited, srcx-1, srcy,n, temp+'U')
+        
+        
+        visited[srcx][srcy] = 0
+    # Function to find all possible paths
+    def findPath(self, mat):
+        self.ans = []
+        
+        
+        if mat[0][0] == 0:
+            return self.ans
+        n = len(mat)
+        visited = [[0]* n for _ in range(n)]
+        
+        self.helper(mat, visited, 0 , 0 , n, "")
+        return self.ans
