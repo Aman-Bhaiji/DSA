@@ -1,0 +1,12 @@
+def powerofnumber(n, power):
+    assert n>=0, "The number should be greater than equal to zero"
+
+    if power==0:
+        return 1
+
+    if power<0:
+        return 1/ n* powerofnumber(n, power+1)
+
+    return n * powerofnumber(n, power-1)
+
+print(powerofnumber(2,-2))
