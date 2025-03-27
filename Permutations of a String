@@ -1,0 +1,20 @@
+class Solution:
+
+    def helper(self, stringArr, i, ans):
+        if i == len(stringArr):
+            ans.append("".join(stringArr))
+            return
+        
+        for j in range(i,len(stringArr)):
+            stringArr[i], stringArr[j] = stringArr[j], stringArr[i]
+            
+            self.helper(stringArr, i+1, ans)
+            
+            stringArr[i], stringArr[j] = stringArr[j], stringArr[i]
+        
+    def findPermutation(self, s):
+        ans = []
+        ss= list(s)
+        self.helper(ss,0, ans)
+        my_set = set(ans)
+        return list(my_set)
